@@ -9,6 +9,19 @@ This repository provisions a local Kubernetes cluster (KinD) using Terraform, bu
 - kind
 - helm
 
+## Quick Start (com scripts)
+
+For those who just want to quickly run/delete using Minikube + Terraform (external mode):
+
+- Upload the game: `./hextris.sh up` (the script prints the access URL at the end)
+- View status: `./hextris.sh status`
+- Delete the game: `./hextris.sh down` or `./hextris-destroy.sh`
+
+Notes:
+- Requires minikube, kubectl, terraform, helm, and docker installed on the host.
+- The `hextris.sh up` script builds the `hextris:local` image inside Minikube's Docker and applies Terraform with `-var='cluster_mode=external``.
+- To manually open the URL, you can use: `minikube service hextris -n hextris --url` or `echo "http://$(minikube ip):30080"`.
+
 ## Project Structure
 - terraform/: Terraform scripts to create KinD cluster and deploy Helm release
 - charts/hextris/: Helm chart for Hextris (Deployment + NodePort Service)
