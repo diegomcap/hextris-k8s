@@ -1,0 +1,21 @@
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.log
+
+# Terraform
+.terraform/
+terraform/.terraform/
+terraform/terraform.tfstate
+terraform/terraform.tfstate.*
+terraform/crash.log
+terraform/.terraform.lock.hcl
+terraform/kubeconfig
+
+# Helm chart build artifacts
+charts/**/charts/
+charts/**/tmp/
+
+# Node/npm (not used here but safe)
+node_modules/

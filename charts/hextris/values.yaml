@@ -1,0 +1,16 @@
+image:
+  repository: hextris
+  tag: local
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+service:
+  type: NodePort
+  port: 80
+  nodePort: 30080
+
+resources: {}
+
+ingress:
+  enabled: false

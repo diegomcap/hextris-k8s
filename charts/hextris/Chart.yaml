@@ -1,0 +1,16 @@
+apiVersion: v2
+name: hextris
+description: Hextris HTML5 puzzle game on Nginx
+icon: https://hextris.github.io/hextris/favicon.ico
+keywords:
+  - game
+  - tetris
+  - hextris
+  - html5
+  - nginx
+maintainers:
+  - name: You
+    email: you@example.com
+version: 0.1.0
+appVersion: "latest"
+type: application
