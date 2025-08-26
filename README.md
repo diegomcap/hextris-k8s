@@ -58,6 +58,50 @@ kubectl -n hextris port-forward svc/hextris 8080:80
 open http://localhost:8080
 ```
 
+## Alternative: Use Minikube without Docker Desktop (Terraform external mode)
+
+If you don’t have Docker Desktop (required by KinD), you can deploy to Minikube using Terraform’s external mode.
+
+1) Start Minikube
+
+```
+minikube start --driver=hyperkit --cpus=2 --memory=4096 --disk-size=20g
+```
+
+2) Build the image inside Minikube’s Docker
+
+```
+eval $(minikube docker-env)
+docker build -t hextris:local .
+```
+
+3) Deploy with Terraform in external mode
+
+```
+cd terraform
+terraform init
+terraform apply -auto-approve -var='cluster_mode=external'
+```
+
+4) Access the app
+
+```
+# Option A (prints a usable URL):
+minikube service hextris -n hextris --url
+
+# Option B (NodePort via Minikube IP):
+echo "http://$(minikube ip):30080"
+```
+
+Notes:
+- cluster_mode defaults to "kind". Passing -var='cluster_mode=external' tells Terraform to use your current kubeconfig (Minikube) and skip creating KinD or loading images via kind.
+- If you use Option B and your firewall blocks the IP, use port-forward instead:
+
+```
+kubectl -n hextris port-forward svc/hextris 8080:80
+open http://localhost:8080
+```
+
 ## Clean up
 
 Choose the cleanup path that matches how you ran the project.
